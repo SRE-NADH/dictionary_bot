@@ -28,7 +28,6 @@ if(val){
                 addMessageToUi('wait for response...','recieve');
                 const response = await fetch(`${url}?word=${val}`, options);
                 const result = await response.json();
-                console.log(result)
                 if(!result.definition){
                     changeExistingMessage('try another word..');
                     return;
@@ -53,11 +52,11 @@ function addMessageToUi(value,type){
     message.className = `${type}`;
     message.innerHTML = `<p class="message ">${value}</p>`;
     messageContainer.appendChild(message);
+    message.scrollIntoView({ behavior: 'smooth', block: 'end' });
 }
 
 
 function changeExistingMessage(value){
-    console.log(1)
     let message =messageContainer.lastChild;
     message.innerHTML = `<p class="message ">${value}</p>`;
     message.scrollIntoView({ behavior: 'smooth', block: 'end' });
